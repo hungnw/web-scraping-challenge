@@ -1,10 +1,11 @@
+# Import dependencies
 from splinter import Browser
 import requests
 from bs4 import BeautifulSoup as bs
 from pprint import pprint
 import pandas as pd
 
-#taken from activity #9 Day 3
+# Refer activity 12.3.9
 def init_browser():
     # @NOTE: Replace the path with your actual path to the chromedriver
     executable_path = {"executable_path": "chromedriver"}
@@ -13,11 +14,11 @@ def init_browser():
 
 mars_web = {}
 hemisphere_image_urls = []
-# #news scrape
+# News scrape
 def scrape_news():
-    
+
     browser = init_browser()
-    
+
     #Launches Website
     url = 'https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'
     browser.visit(url)
@@ -29,14 +30,14 @@ def scrape_news():
     latest_news_date = (soup.find_all('div', class_="list_date"))[0].get_text()
     latest_news_title = (soup.find_all('div', class_='content_title'))[0].get_text()
     latest_news_paragraph = (soup.find_all('div', class_='article_teaser_body'))[0].get_text()
-    
+
     mars_web['latest_news_date'] = latest_news_date
     mars_web['latest_news_title'] = latest_news_title
     mars_web['latest_news_paragraph'] = latest_news_paragraph
-   
+
     browser.quit()
     return mars_web
-    
+
 def scrape_marsImg():
     browser = init_browser()
     #### Set up Scraper for Mars Images from Images Site.
@@ -48,12 +49,12 @@ def scrape_marsImg():
     image = (soup.find_all('div', class_='carousel_items')[0].a.get('data-fancybox-href'))
     #example of print out
     featured = 'https://www.jpl.nasa.gov'+ image
-    
+
     mars_web['featured_image'] = featured
-    
+
     browser.quit()
     return mars_web
-    
+
 def scrape_marsTwitter():
     browser = init_browser()
     #### Scrape Mars Weather From Twitter Account
@@ -63,12 +64,12 @@ def scrape_marsTwitter():
     soup = bs(html, 'html.parser')
     #Save The Tweet of the most Recent Mars Weather String.
     mars_weather = (soup.find_all('p', class_='TweetTextSize TweetTextSize--normal js-tweet-text tweet-text')[0].get_text())
-    
+
     mars_web['mars_weather'] = mars_weather
-    
-    browser.quit()      
+
+    browser.quit()
     return mars_web
-    
+
 def scrape_marsFacts():
     browser = init_browser()
     ## Scraping Mars Facts Webpage
@@ -78,11 +79,11 @@ def scrape_marsFacts():
     soup = bs(html, 'html.parser')
     tables_df = ((pd.read_html(url))[0]).rename(columns={0: "Attribute", 1: "Value"}).set_index(['Attribute'])
     html_table = (tables_df.to_html()).replace('\n', '')
-    
+
     mars_web['mars_data'] = html_table
     browser.quit()
     return mars_web
-        
+
 def scrape_marsHemi1():
     browser = init_browser()
     ### Mars Hemispheres Scraping
@@ -94,10 +95,10 @@ def scrape_marsHemi1():
     cerberus_url = (soup.find_all('div', class_='downloads')[0].li.a.get('href'))
     mars_web['hemisphere_urls'] = hemisphere_image_urls
     hemisphere_image_urls.append([{"title": "Cerberus Hemisphere", "img_url": cerberus_url}])
-    
+
     browser.quit()
     return mars_web
-    
+
 def scrape_marsHemi2():
     #scrape
     #Schiaparelli Hemisphere url
@@ -111,8 +112,8 @@ def scrape_marsHemi2():
 
     browser.quit()
     return mars_web
-    
-def scrape_marsHemi3():        
+
+def scrape_marsHemi3():
     #scrape
     #Syrtis Major Hemisphere
     browser = init_browser()
@@ -125,8 +126,8 @@ def scrape_marsHemi3():
 
     browser.quit()
     return mars_web
-        
-def scrape_marsHemi4():     
+
+def scrape_marsHemi4():
     #scrape
     #Valles Marineris Hemisphere Url
     browser = init_browser()
