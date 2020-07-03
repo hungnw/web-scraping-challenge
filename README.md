@@ -1,9 +1,8 @@
-# Web Scraping Project - Mission to Mars
+# Mission to Mars
 
-![mission_to_mars](Images/mission_to_mars.png)
+![mission_to_mars](Images/mission_to_mars.jpg)
 
-In this challenge, you will build a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page. The following outlines what you need to do.
-
+In this assignment, you will build a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page. The following outlines what you need to do.
 
 ## Step 1 - Scraping
 
@@ -40,9 +39,6 @@ featured_image_url = 'https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA1
 ### Mars Weather
 
 * Visit the Mars Weather twitter account [here](https://twitter.com/marswxreport?lang=en) and scrape the latest Mars weather tweet from the page. Save the tweet text for the weather report as a variable called `mars_weather`.
-* **Note: Be sure you are not signed in to twitter, or scraping may become more difficult.**
-* **Note: Twitter frequently changes how information is presented on their website. If you are having difficulty getting the correct html tag data, consider researching Regular Expression Patterns and how they can be used in combination with the .find() method.**
-
 
 ```python
 # Example:
@@ -51,7 +47,7 @@ mars_weather = 'Sol 1801 (Aug 30, 2017), Sunny, high -21C/-5F, low -80C/-112F, p
 
 ### Mars Facts
 
-* Visit the Mars Facts webpage [here](https://space-facts.com/mars/) and use Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc.
+* Visit the Mars Facts webpage [here](http://space-facts.com/mars/) and use Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc.
 
 * Use Pandas to convert the data to a HTML table string.
 
@@ -100,6 +96,10 @@ Use MongoDB with Flask templating to create a new HTML page that displays all of
 
 * Use Splinter to navigate the sites when needed and BeautifulSoup to help find and parse out the necessary data.
 
-* Use Pymongo for CRUD applications for your database. For this challenge, you can simply overwrite the existing document each time the `/scrape` url is visited and new data is obtained.
+* Use Pymongo for CRUD applications for your database. For this homework, you can simply overwrite the existing document each time the `/scrape` url is visited and new data is obtained.
 
 * Use Bootstrap to structure your HTML template.
+
+## Copyright
+
+Trilogy Education Services © 2017. All Rights Reserved.
